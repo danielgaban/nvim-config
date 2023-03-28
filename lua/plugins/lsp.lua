@@ -11,6 +11,9 @@ return {
     { 'hrsh7th/nvim-cmp' },     -- Required
     { 'hrsh7th/cmp-nvim-lsp' }, -- Required
     { 'L3MON4D3/LuaSnip' },     -- Required
+    { 'hrsh7th/cmp-buffer'  },
+    { 'hrsh7th/cmp-path'  },
+    { 'hrsh7th/cmp-cmdline' },
 
     -- Formatter
     { 'jose-elias-alvarez/null-ls.nvim' },
@@ -26,7 +29,7 @@ return {
     },
 
     --Vscode lsp icons
-    { 
+    {
       'onsails/lspkind-nvim',
       init = function ()
         require('lspkind').init({
@@ -76,16 +79,13 @@ return {
   },
   config = function()
     local lsp = require('lsp-zero').preset({
-      name = 'minimal',
-      manage_nvim_cmp = true,
-      set_lsp_keymaps = true,
-      suggest_lsp_servers = false,
+      manage_nvim_cmp = {
+        set_sources = 'recommended'
+      }
     })
     lsp.on_attach(function(client, bufnr)
       lsp.default_keymaps({ buffer = bufnr })
     end)
-    -- (Optional) Configure lua language server for neovim
-    require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
     lsp.ensure_installed({
       'tsserver',
       'lua_ls',
@@ -98,12 +98,12 @@ return {
       'pyright',
     })
 
+
     -- Autocomplete
 
     local cmp = require('cmp')
     lsp.setup_nvim_cmp({
-      sources = lsp.defaults.cmp_sources(),
-      mapping = lsp.defaults.cmp_mappings({
+      mapping = cmp.mapping.preset.insert({
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -111,6 +111,7 @@ return {
         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       }),
       formatting = {
+        fields = {'abbr', 'kind', 'menu'},
         format = require('lspkind').cmp_format({
           mode = 'symbol', -- show only symbol annotations
           maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
@@ -148,14 +149,14 @@ return {
             PRETTIERD_DEFAULT_CONFIG = vim.fn.expand('~/AppData/Local/nvim/utils/.prettierrc.json')
           }
         }),
+        null_ls.builtins.formatting.autopep8
       }
     })
 
     local mnls = require('mason-null-ls')
     mnls.setup({
-      ensure_installed = { 'prettierd' },
       automatic_installation = true, -- You can still set this to `true`
-      automatic_setup = true,
+      automatic_setup = false,
     })
     mnls.setup_handlers()
 
