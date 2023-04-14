@@ -144,7 +144,7 @@ return {
       end,
       sources = {
         null_ls.builtins.formatting.prettierd.with({
-          extra_filetypes = { 'svelte', 'astro', 'toml' },
+          extra_filetypes = { 'svelte', 'astro', 'toml', 'solidity' },
           env = {
             PRETTIERD_DEFAULT_CONFIG = vim.fn.expand('~/AppData/Local/nvim/utils/.prettierrc.json')
           }
@@ -156,9 +156,8 @@ return {
     local mnls = require('mason-null-ls')
     mnls.setup({
       automatic_installation = true, -- You can still set this to `true`
-      automatic_setup = false,
+      automatic_setup = false
     })
-    mnls.setup_handlers()
 
     -- UI
     require('lspsaga').setup({

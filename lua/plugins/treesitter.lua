@@ -8,7 +8,6 @@ return {
       'cpp',
       'lua',
       'vim',
-      'help',
       'markdown',
       'markdown_inline',
       'tsx',
