@@ -1,12 +1,24 @@
+-- return {
+--   'folke/tokyonight.nvim',
+--   lazy = false,
+--   priority = 1000,
+--   config = function ()
+--     require('tokyonight').setup({
+--       style = 'night',
+--       transparent = true
+--     })
+--     vim.cmd('colorscheme tokyonight')
+--   end
+-- }
 return {
-  'folke/tokyonight.nvim',
+  'svrana/neosolarized.nvim',
   lazy = false,
   priority = 1000,
-  config = function ()
-    require('tokyonight').setup({
-      style = 'night',
-      transparent = true
-    })
-    vim.cmd('colorscheme tokyonight')
-  end
+  dependencies = {
+    {'tjdevries/colorbuddy.nvim'}
+  },
+  opts = {
+    comment_italics = true,
+    background_set = false
+  }
 }
