@@ -1,5 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter',
+  version = false,
   build = ':TSUpdate',
   event = {'BufReadPost', 'BufNewFile'},
   opts = {
@@ -8,6 +9,7 @@ return {
       'cpp',
       'lua',
       'vim',
+      'vimdoc',
       'markdown',
       'markdown_inline',
       'tsx',
@@ -34,6 +36,6 @@ return {
     }
   },
   config = function(_, opts)
-    require('nvim-treesitter.configs').setup(opts)
+    require("nvim-treesitter.configs").setup(opts)
   end,
 }
