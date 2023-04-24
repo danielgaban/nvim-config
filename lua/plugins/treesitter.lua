@@ -23,7 +23,8 @@ return {
       'typescript',
       'svelte',
       'python',
-      'solidity'
+      'solidity',
+      'prisma'
     },
     highlight = {
       enable = true

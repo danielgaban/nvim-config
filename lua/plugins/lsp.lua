@@ -96,6 +96,7 @@ return {
       'jsonls',
       'solc',
       'pyright',
+      'prismals'
     })
 
 
